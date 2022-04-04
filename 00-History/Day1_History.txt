@@ -25,3 +25,36 @@
    23  history 
    24  history > 00-History/Day1_History.txt
 ```
+
+## Demo 2 - Docker Images 
+```
+ 28  git push
+   29  ls
+   30  docker ps
+   31  docker ps -a
+   32  docker images
+   33  docker pull ubuntu
+   34  docker images
+   35  docker run ubuntu echo "Hello World"
+   36  cat /etc/os-release
+   37  docker run ubuntu cat /etc/os-release
+   38  docker images
+   39  docker ps -a
+   40  docker pull ubuntu:16.04
+   41  docker images
+   42  docker run ubuntu:16.04 cat /etc/os-release
+   43  docker ps
+   44  docker ps -a
+   45  docker run ubuntu:16.04 cats /etc/os-release
+   46  docker ps -a
+   47  docker pull amitvashist7/apache-ex4
+   48  docker login
+   49* docker pull amitvashist7/apache-ex
+   50  docker logout
+   51  docker images
+   52  docker pull amitvashist7/k8s-tiny-web
+   53  docker images
+   54  docker pull amitvashist7/k8s-tiny-web:2
+   55  docker pull amitvashist7/k8s-tiny-web:3
+   56  docker images
+```
