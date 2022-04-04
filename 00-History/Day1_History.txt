@@ -45,3 +45,73 @@
    55  docker pull amitvashist7/k8s-tiny-web:3
    56  docker images
 ```
+
+## Demo 3 
+```
+ 72  docker images
+   73  docker run ubuntu:16.04 echo "Hello World"
+   74  docker ps
+   75  docker ps -a
+   76  docker run ubuntu:16.04 echo "Hello World"
+   77  docker ps -a
+   78  docker run --name Test-Cont-1 ubuntu:16.04 echo "Hello World"
+   79  docker ps -a
+   80  docker run --name Test-Cont-1 ubuntu:16.04 echo "Hello World"
+   81  docker run --name Test-Cont-2 ubuntu:16.04 echo "Hello World"
+   82  docker ps -a
+   83  docker rm 8f8d44b44d03
+   84  docker rm 29b02e142811
+   85  docker ps -a
+   86  docker ps -a
+   87  docker ps -aq
+   88  docker rm  $(docker ps -aq)
+   89  docker ps
+   90  docker ps -a
+   91  docker ps -a
+   92  docker run --name Test-Cont-1 ubuntu:16.04 echo "Hello World"
+   93  docker run -it --name Test-Cont-2 ubuntu:16.04
+   94  docker ps
+   95  docker ps -a
+   96  docker run -itd --name Test-Cont-3 ubuntu:16.04
+   97  docker run -itd --name Test-Cont-4 ubuntu:16.04
+   98  docker ps
+   99  docker stop Test-Cont-3
+  100  docker kill Test-Cont-4
+  101  docker ps
+  102  docker ps -a
+  103  docker ps
+  104  docker ps -q
+  105  docker inspect 79f32f6a9e3d
+  106  cd /var/lib/docker/
+  107  ls
+  108  cd containers/49acd82efc98ec3db2c033f205113be64235ddae43a7fdb8ead0e7eb08f8bca0/mounts/
+  109  ls
+  110  cd ..
+  111  ls
+  112  cd ..
+  113  ls
+  114  cd ..
+  115  ls
+  116  du -sh containers
+  117  cd
+  118  ls
+  119  docker run -itd --name Test-Cont-5 ubuntu:16.04
+  120  docker ps
+  121  docker inspect Test-Cont-5
+  122  docker run -itd --name Test-Cont-6 ubuntu:16.04
+  123  docker run -itd --name Test-Cont-7 ubuntu:16.04
+  124  docker run -itd --name Test-Cont-8 ubuntu:16.04
+  125  docker ps
+  126  docker inspect --format '{{.Name}}{{.NetworkSettings.IPAddress}}' 1b7c975841ed
+  127  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' 1b7c975841ed
+  128  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  129  docker ps
+  130  docker ps -a
+  131  docker start Test-Cont-4
+  132  docker start Test-Cont-3
+  133*
+  134  docker ps
+  135  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  136  ls
+  137  cd docker-k8s-vmware-04-April-2022/
+```
