@@ -1,0 +1,27 @@
+## Demo 1 - Install Docker 
+```
+    1  git clone https://github.com/amitvashisttech/docker-k8s-vmware-04-April-2022.git
+    2  ls
+    3  cd docker-k8s-vmware-04-April-2022/
+    4  ls
+    5  mkdir 00-History 01-Docker/00-Setup -p 
+    6  cd 01-Docker/00-Setup/
+    7  ls
+    8  vim install-docker.sh 
+    9  ls
+   10  chmod +x install-docker.sh 
+   11  ./install-docker.sh 
+   12  docker version 
+   13  docker ps -a 
+   14  docker container ls 
+   15  docker container ls -a 
+   16  docker run busybox echo "Welecome to the world of Docker" 
+   17  docker run busybox echo "Welcome to the world of Docker" 
+   18  ls
+   19  cd ..
+   20  ls
+   21  cd ..
+   22  ls
+   23  history 
+   24  history > 00-History/Day1_History.txt
+```
