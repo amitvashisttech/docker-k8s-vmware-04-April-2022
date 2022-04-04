@@ -115,3 +115,189 @@
   136  ls
   137  cd docker-k8s-vmware-04-April-2022/
 ```
+
+## Demo 3 & 4 : Dockerfile & Network
+```
+  147  docker ps
+  148  docker attach Test-Cont-8
+  149  docker ps
+  150  docker attach Test-Cont-7
+  151  docker ps
+  152  docker kill $(docker ps -qa)
+  153  docker rm $(docker ps -qa)
+  154  docker ps -a
+  155  ls
+  156  mkdir 02-Dockerfile/apache/v1 -p
+  157  cd 02-Dockerfile/apache/v1/
+  158  ls
+  159  vim Dockerfile
+  160  docker run -it test-apache-1 ubuntu:16.04
+  161  docker run -it --name test-apache-1 ubuntu:16.04
+  162  docker images
+  163  docker ps
+  164  docker attach test-apache-1
+  165  docker ps
+  166  docker inspect test-apache-1
+  167  curl 172.17.0.2
+  168  curl 172.17.0.3
+  169  curl 172.17.0.2
+  170  docker ps
+  171  docker attach test-apache-1
+  172  docker images
+  173  docker ps
+  174  docker commit -m "Test Apache" 9fc82ab0923c test-cont-apache-image:v1
+  175  docker ps
+  176  docker images
+  177  docker run -itd --name test-1 test-cont-apache-image:v1
+  178  docker ps
+  179  curl 172.17.0.3
+  180  docker inspect test-1
+  181  docker images
+  182  ls
+  183  vim Dockerfile
+  184  docker build -t myapache:v1 .
+  185  ls
+  186  docker images
+  187  docker run -d --name myapache-test-1 myapache:v1
+  188  docker ps
+  189  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  190  curl 172.17.0.4
+  191  docker images
+  192  curl 172.17.0.4
+  193  docker run -d --name myapache-test-2 myapache:v1
+  194  docker run -d --name myapache-test-3 myapache:v1
+  195  curl 172.17.0.4
+  196  curl 172.17.0.5
+  197  curl 172.17.0.6
+  198  ls
+  199  cd ..
+  200  ls
+  201  cp -rf v1 v2
+  202  ls
+  203  cd v2/
+  204  ls
+  205  vim index.html
+  206  ls
+  207  vim Dockerfile
+  208  docker build -t myapache:v2 .
+  209  docker images
+  210  docker ps
+  211  docker run -d --name myapache-test-4 myapache:v2
+  212  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  213  curl 172.17.0.7
+  214  curl 172.17.0.6
+  215  curl 172.17.0.7
+  216  docker images
+  217  docker history myapache:v1
+  218  docker history myapache:v2
+  219  docker images
+  220  ls
+  221  cd ..
+  222  ls
+  223  cd
+  224  du -sh
+  225  du -sh /var/lib/docker/image/
+  226  ls
+  227  cd docker-k8s-vmware-04-April-2022/
+  228  ls
+  229  cd /var/lib/docker/image/
+  230  ls
+  231  cd overlay2/
+  232  ls
+  233  cd
+  234  docker images
+  235  docker ps
+  236  docker inspect myapache-test-4
+  237  ls
+  238  du -sh  /var/lib/docker/
+  239  du -sh  /var/lib/docker/*
+  240  du -sh  /var/lib/docker/overlay2
+  241  ls
+  242  cd docker-k8s-vmware-04-April-2022/
+  243  ls
+  244  docker ps
+  245  ls
+  246  cd 02-Dockerfile/
+  247  ls
+  248  mkdir python
+  249  cd python/
+  250  ls
+  251  vim app.py
+  252  ls
+  253  vim req.txt
+  254  docker ps
+  255  curl -vvv 172.17.0.7
+  256  ls
+  257  vim Dockerfile
+  258  ls
+  259  docker build -t mypywebapp:v1 .
+  260  docker images
+  261  docker run -d amitvashist7/k8s-tiny-web
+  262  docker ps
+  263  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  264  curl 172.17.0.8
+  265  curl 172.17.0.7
+  266  docker run -d --name test-py-app-1 mypywebapp:v1
+  267  docker ps
+  268  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  269  curl 172.17.0.9
+  270  ls
+  271  vim app.py
+  272  docker ps
+  273  curl 172.17.0.9
+  274  curl 172.17.0.9:8080
+  275  curl 172.17.0.9:8080/hello
+  276  curl 172.17.0.9:8080/info
+  277  ls
+  278  mkdir v1
+  279  ls
+  280  mv * v1
+  281  ls
+  282  cp -rf v1 v2
+  283  ls
+  284  cd v2/
+  285  s
+  286  ls
+  287  vim Dockerfile
+  288  docker ps
+  289  docker build -t mypywebapp:v2 .
+  290  docker ps
+  291  docker run -d --name test-py-app-2 mypywebapp:v2
+  292  docker ps
+  293  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  294  curl 172.17.0.10:8080
+  295  curl 172.17.0.10:8080/info
+  296  docker ps
+  297  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  298  curl 172.17.0.10:8080
+  299  ip addr
+  300  docker ps
+  301  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  302  ip addr
+  303  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  304  docker inspect test-py-app-2
+  305  ls
+  306  netstat -tulnp
+  307  curl localhost
+  308  curl localhost:8080
+  309  docker run -d --name test-py-app-3 -p 8080:8080 mypywebapp:v2
+  310  docker ps
+  311  netstat -tulnp
+  312  systemctl status docker
+  313  curl localhost:8080
+  314  docker ps
+  315  docker run -d --name test-py-app-4 -p 8080:8080 mypywebapp:v2
+  316  docker run -d --name test-py-app-5 -P mypywebapp:v2
+  317  docker ps
+  318  docker run -d --name test-py-app-6 -P mypywebapp:v2
+  319  docker run -d --name test-py-app-7 -P mypywebapp:v2
+  320  docker ps
+  321  docker run -d --name test-py-app-7 -P myapache:v2
+  322  docker run -d --name test-py-app-8 -P myapache:v2
+  323  docker ps
+  324  docker run -d --name test-py-app-9 -p 8085:80 myapache:v2
+  325  docker ps
+  326  docker run -d --name test-py-app-10 -p 8086:80 myapache:v1
+  327  docker ps
+
+```
