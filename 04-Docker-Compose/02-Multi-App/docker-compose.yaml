@@ -1,0 +1,19 @@
+---
+
+nginx: 
+  image: nginx:latest
+  ports: 
+    - '8090:80'
+
+
+
+myapache: 
+  image: myapache:v1 
+  ports: 
+    - '8091:80'
+
+
+mypywebapp: 
+  image: mypywebapp:v3
+  ports: 
+    - '9095:8080'
