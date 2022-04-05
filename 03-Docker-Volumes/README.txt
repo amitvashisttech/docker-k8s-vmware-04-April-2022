@@ -51,3 +51,35 @@
   456  docker volume rm $(docker volume ls -q)
   457  docker volume ls
 ```
+
+
+```
+ 482  mkdir -p /var/www/html/
+  483  ls
+  484  docker run -d --name test-web-2 -v /var/www/html/:/var/www/html myapache:v2
+  485  docker run -d --name test-web-3 -v /var/www/html/:/var/www/html myapache:v2
+  486  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  487  curl 172.17.0.3
+  488  curl 172.17.0.4
+  489  cd /var/www/html/
+  490  ls
+  491  docker ps
+  492  vim index.html
+  493  curl 172.17.0.4
+  494  curl 172.17.0.3
+  495  cd
+  496  docker ps
+  497  docker run -d --name test-web-4 --volumes-from test-web-2 myapache:v2
+  498  docker run -d --name test-web-5 --volumes-from test-web-2 myapache:v2
+  499  docker inspect --format '{{.Name}}  {{.NetworkSettings.IPAddress}}' $(docker ps -q)
+  500  curl 172.17.0.3
+  501  curl 172.17.0.4
+  502  curl 172.17.0.5
+  503  curl 172.17.0.6
+  504  vim /var/www/html/index.html
+  505  curl 172.17.0.6
+  506  curl 172.17.0.5
+  507  curl 172.17.0.4
+  508  curl 172.17.0.3
+
+```
