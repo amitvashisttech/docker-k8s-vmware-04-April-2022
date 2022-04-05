@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: nginx-k8s
+  name: nginx-k8s
+spec:
+  imagePullSecrets:
+  - name: regcred
+  containers:
+  - image: nginx
+    name: nginx-k8s
+    ports:
+    - containerPort: 80
