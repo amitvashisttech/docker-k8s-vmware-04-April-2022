@@ -25,3 +25,16 @@ sum(rate(prometheus_http_requests_total[5m])) by (job)
 In GB - Memory Utilization
 
 ( node_memory_MemTotal_bytes - node_memory_MemFree_bytes ) / 1024 / 1024 / 1024
+
+
+Grafana
+========>
+node_cpu_seconds_total{job="node_exporter", instance="172.31.0.100:9100"}
+
+rate(node_cpu_seconds_total{job="node_exporter",instance="localhost:9100",mode!="idle"}[1m])
+
+irate(node_cpu_seconds_total{job="node_exporter",instance="localhost:9100",mode!="idle"}[1m])
+
+avg without(cpu) (rate(node_cpu_seconds_total{job="node_exporter", instance="172.31.0.100:9100", mode!="idle"}[1m]))
+
+Legend : {{mode}}
