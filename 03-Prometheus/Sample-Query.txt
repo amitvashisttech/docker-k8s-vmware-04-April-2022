@@ -1,0 +1,27 @@
+```
+{job=~".*etheus"}
+prometheus_http_requests_total{code!~"2.."}
+prometheus_http_requests_total{code!~"4.."}
+
+rate(prometheus_http_requests_total{method="post"}[5m])
+
+rate(prometheus_http_requests_total{code="200"}[5m])
+
+rate(prometheus_http_requests_total{code=~"4.."}[3h])
+
+prometheus_http_requests_total{code=~"2.*|4.*"}
+
+rate(node_cpu_seconds_total{job="node_exporter", instance="172.31.0.100:9100"}[1m])
+
+
+
+Function
+rate(prometheus_http_requests_total[5m])
+sum(rate(prometheus_http_requests_total[5m])) by (job)
+
+
+( node_memory_MemTotal_bytes - node_memory_MemFree_bytes )
+
+In GB - Memory Utilization
+
+( node_memory_MemTotal_bytes - node_memory_MemFree_bytes ) / 1024 / 1024 / 1024
