@@ -88,10 +88,44 @@ node_memory_MemTotal_bytes{job="node_exporter"} - node_memory_MemFree_bytes{job=
 
 
 
+Flask Web App: 
+
+# docker-compose up -d 
+
+# docker-compose ps 
+
+# curl localhost:5000 
+
+# curl localhost:8000
+
+-> Update the promtheus file 
+----
 
 
 
+----
+# systemctl stop prometheus
+# systemctl start prometheus
 
+
+-> Go to Prometheus UI & Excute the following query: 
+
+( rate(mysql_query_latency_seconds_sum[5m]) / rate(mysql_query_latency_seconds_count[5m]) )
+
+sum(rate(flask_request_latency_seconds_bucket{le="1.0"}[5m])) by (job) / sum(rate(flask_request_latency_seconds_count[5m])) by (job)
+
+Appdex Score Query : 
+==================>
+
+( sum(rate(flask_request_latency_seconds_bucket{le="0.25"}[5m])) by (job) + sum(rate(flask_request_latency_seconds_bucket{le="1.0"}[5m])) by (job)  )/  2 / sum(rate(flask_request_latency_seconds_count[5m])) by (job)
+
+
+
+To improve the score : 
+ while true; do time curl localhost:5000/query; done
+
+To decrease the score: 
+while true; do time curl localhost:5000/sleep; done
 
 
 
